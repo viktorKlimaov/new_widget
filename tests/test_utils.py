@@ -12,8 +12,8 @@ def test_get_to(a, b):
 
 
 @pytest.mark.parametrize('a, b', [(None, ''),
-                                  ('Visa Classic 2842878893689012', 'Visa Classic 2842 87** ****9012 -> '),
-                                  ('Maestro 7810846596785568', 'Maestro 7810 84** ****5568 -> '),
+                                  ('Visa Classic 2842878893689012', 'Visa Classic 2842 87** **** 9012 -> '),
+                                  ('Maestro 7810846596785568', 'Maestro 7810 84** **** 5568 -> '),
                                   ('Счет 38611439522855669794', 'Счет **9794 -> ')])
 def test_get_from(a, b):
     assert get_from(a) == b

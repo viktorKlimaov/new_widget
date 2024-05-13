@@ -3,6 +3,9 @@ from typing import Any
 
 
 def get_list_operation():
+    """
+    Открывает и сортерует json файл
+    """
     with open('operations.json', 'rt', encoding='utf-8') as file:
         list_operation = json.load(file)
 
@@ -16,6 +19,10 @@ def get_list_operation():
 
 
 def get_user_operation(item: dict[str, Any]):
+    """
+    Получает по ключу нужные значения,
+    и возвращает в изменённом формате
+    """
     date = get_date(item.get('date'))
     description = item.get('description')
     from_ = get_from(item.get('from'))
@@ -27,11 +34,17 @@ def get_user_operation(item: dict[str, Any]):
 
 
 def get_date(date):
+    """
+    Возвращает дату в читаемом формате
+    """
     date_split = date[0:10].split(sep='-')
     return f'{date_split[2]}.{date_split[1]}.{date_split[0]}'
 
 
 def get_from(from_):
+    """
+    Возвращает частично замаскированный номер счета отправителя
+    """
     if from_ is None:
         return ''
     else:
@@ -40,10 +53,13 @@ def get_from(from_):
         number_1.split(' ')
         if number[0] == 'Счет':
             return f'{number[0]} **{number_1[-4:]} -> '
-        return f'{' '.join(number[:-1])} {number_1[:4]} {number_1[4:6]}** ****{number_1[-4:]} -> '
+        return f'{' '.join(number[:-1])} {number_1[:4]} {number_1[4:6]}** **** {number_1[-4:]} -> '
 
 
 def get_to(to_):
+    """
+    Возвращает частично замаскированный номер счета получателя
+    """
     number = to_.split(' ')
     number_1 = number[-1]
     number_1.split(' ')
